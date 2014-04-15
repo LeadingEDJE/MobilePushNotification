@@ -35,7 +35,6 @@ public class GCMIntentService extends IntentService {
 
     /**
      * This handler is triggered when a push notification arrives
-     * 
      * @param intent Intent containing notification information
      */
     @Override
@@ -54,36 +53,14 @@ public class GCMIntentService extends IntentService {
              * ignore any message types you're not interested in, or that you
              * don't recognize.
              */
-            if ( GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals( messageType ) ) {
-                Log.d( TAG, "onHandleIntent(): Received type send error: " + extras.toString() );
-            } else if ( GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals( messageType ) ) {
-                Log.d( TAG, "onHandleIntent(): Received type deleted: " + extras.toString() );
-            } else if ( GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals( messageType ) ) {
+            if ( GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals( messageType ) ) {
                 // Send notification of received message.
-                Log.d( TAG, "onHandleIntent(): Received type message: " + extras.toString() );
+                Log.d( TAG, "onHandleIntent(): Received GCM message: " + extras.toString() );
                 sendNotification( intent );
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GCMBroadcastReceiver.completeWakefulIntent( intent );
-    }
-
-    /**
-     * Override handling of intent service creation
-     */
-    @Override
-    public void onCreate() {
-        Log.d( TAG, "onCreate(): Started" );
-        super.onCreate();
-    }
-
-    /**
-     * Override handling of intent service removal
-     */
-    @Override
-    public void onDestroy() {
-        Log.d( TAG, "onDestroy(): Started" );
-        super.onDestroy();
     }
 
     /**
