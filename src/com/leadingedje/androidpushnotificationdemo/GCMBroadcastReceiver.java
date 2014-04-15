@@ -18,6 +18,12 @@ import android.util.Log;
 public class GCMBroadcastReceiver extends WakefulBroadcastReceiver {
     private static final String TAG = GCMBroadcastReceiver.class.getSimpleName();
 
+    /**
+     * This method is called when a notification from GCM arrives
+     * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+     * @param context
+     * @param intent
+     */
     @Override
     public void onReceive( Context context, Intent intent ) {
         Log.d( TAG, "onReceive(): Started" );

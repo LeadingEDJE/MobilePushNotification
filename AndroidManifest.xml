@@ -30,6 +30,10 @@
         App can keep the processor from sleeping when a message is received 
     -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--
+        Notifications cause devices to vibrate 
+    -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!--
         Creates a custom permission so only this app can receive its messages.

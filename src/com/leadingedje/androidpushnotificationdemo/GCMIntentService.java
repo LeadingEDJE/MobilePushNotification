@@ -44,10 +44,10 @@ public class GCMIntentService extends IntentService {
         Bundle extras = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance( this );
         // The getMessageType() intent parameter must be the intent you received
-        // in your BroadcastReceiver.
+        // in your BroadcastReceiver 
         String messageType = gcm.getMessageType( intent );
 
-        if ( !extras.isEmpty() ) { // has effect of unparcelling Bundle
+        if ( !extras.isEmpty() ) { 
             /*
              * Filter messages based on message type. Since it is likely that
              * GCM will be extended in the future with new message types, just
@@ -59,7 +59,7 @@ public class GCMIntentService extends IntentService {
             } else if ( GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals( messageType ) ) {
                 Log.d( TAG, "onHandleIntent(): Received type deleted: " + extras.toString() );
             } else if ( GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals( messageType ) ) {
-                // Post notification of received message.
+                // Send notification of received message.
                 Log.d( TAG, "onHandleIntent(): Received type message: " + extras.toString() );
                 sendNotification( intent );
             }
@@ -89,39 +89,38 @@ public class GCMIntentService extends IntentService {
     /**
      * Display a notification using the received message. The message contains a
      * JSON object with the notification data.
-     * 
      * @param intent - Intent containing the push notification data
      */
     private void sendNotification( Intent intent ) {
         Log.d( TAG, "sendNotification(): Started" );
         notificationManager = (NotificationManager)this.getSystemService( Context.NOTIFICATION_SERVICE );
-
         
-        // TODO: Need to parse and display the notification here
-        // Bundle bundle = intent.getExtras();
-        Notification.Builder mBuilder = new Notification.Builder( this );
-        mBuilder.setSmallIcon( R.drawable.ic_launcher )
-                .setContentTitle( "Title string goes here" )
-                .setStyle( new Notification.BigTextStyle().bigText( "Big text goes here" ) )
-                .setContentText( "Content text goes here" )
-                .setLights( android.R.color.holo_green_light, 300, 1000 )
-                .setDefaults( Notification.DEFAULT_ALL )
-                .setTicker( "Ticker text goes here" );
+        // Bundle will contain contents of data section inside 
+        // notification JSON data
+        Bundle bundle = intent.getExtras();
+        
+        // Get notification content, use default values if keys don't exist
+        String title = bundle.getString( "Title", "Default Title" );
+        String bigText = bundle.getString( "BigText", "Default Big Text" );
+        String contentText = bundle.getString( "ContentText", "Default Content Text" );
+        String tickerText = bundle.getString( "TickerText", "Default Ticker Text" );
 
-        // TODO: Set up the intent for the notification
-        Intent backIntent = new Intent( this, MainActivity.class );
-        backIntent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+        // Build the notification
+        Notification.Builder notificationBuilder = new Notification.Builder( this );
+        notificationBuilder.setSmallIcon( R.drawable.ic_launcher )
+                           .setContentTitle( title )
+                           .setStyle( new Notification.BigTextStyle().bigText( bigText ) )
+                           .setContentText( contentText )
+                           .setLights( android.R.color.holo_green_light, 300, 1000 )
+                           .setDefaults( Notification.DEFAULT_ALL )
+                           .setTicker( tickerText );
+
+        // Set the intent to go to when the notification is tapped
         Intent resultIntent = new Intent( this, MainActivity.class );
-        
-        // TODO: Need to choose one of these
-        mBuilder.setContentIntent( PendingIntent.getActivity( this, 0,
-                                   resultIntent, PendingIntent.FLAG_ONE_SHOT ) );
-        mBuilder.setContentIntent( PendingIntent.getActivities( this, 0,
-                                   new Intent[] { backIntent, resultIntent },
-                                   PendingIntent.FLAG_ONE_SHOT ) );
+        notificationBuilder.setContentIntent( PendingIntent.getActivity( this, 0,
+                                              resultIntent, PendingIntent.FLAG_ONE_SHOT ) );
         
         Log.d( TAG, "sendNotification(): Calling notify() to send the notification" );
-        Notification n = mBuilder.build();
-        notificationManager.notify( DEMO_NOTIFICATION_ID, n );
+        notificationManager.notify( DEMO_NOTIFICATION_ID, notificationBuilder.build() );
     }
 }
