@@ -3,6 +3,7 @@ package com.leadingedje.androidpushnotificationdemo;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,15 +11,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends Activity {
+    
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
+        
+        if ( PushNotificationRegistration.isGooglePlayServicesAvailable( this ) ) {
+            // If Google Play Services are available, attempt to register
+            // for push notifications
+            Log.d( TAG, "onCreate(): Google Play Services are available" );
+            PushNotificationRegistration.register( getApplicationContext(), this );
+        } else {
+            Log.e( TAG, "onCreate(): Google Play Services not available" );
+        }        
+        
         setContentView( R.layout.activity_main );
 
         if ( savedInstanceState == null ) {
             getFragmentManager().beginTransaction().add( R.id.container, new PlaceholderFragment() ).commit();
         }
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if ( PushNotificationRegistration.isGooglePlayServicesAvailable( this ) ) {
+            Log.d( TAG, "onResume(): Google Play Services are available" );
+        } else {
+            Log.e( TAG, "onResume(): Google Play Services not available" );
+        }        
     }
 
     @Override
