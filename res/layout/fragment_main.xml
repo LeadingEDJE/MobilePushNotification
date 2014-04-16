@@ -9,8 +9,43 @@
     tools:context="com.leadingedje.androidpushnotificationdemo.MainActivity$PlaceholderFragment" >
 
     <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/title" />
+
+    <TextView
+        android:id="@+id/tickerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/ticker" />
+    
+    <TextView
+        android:id="@+id/bigtextTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/bigtext" />
+    
+    <TextView
+        android:id="@+id/contentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/content" />
 
 </RelativeLayout>

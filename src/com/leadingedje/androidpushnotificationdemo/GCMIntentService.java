@@ -92,8 +92,21 @@ public class GCMIntentService extends IntentService {
                            .setDefaults( Notification.DEFAULT_ALL )
                            .setTicker( tickerText );
 
-        // Set the intent to go to when the notification is tapped
+        // Create the intent to go to when the notification is tapped.
         Intent resultIntent = new Intent( this, MainActivity.class );
+        
+        // Put the notification data into the intent as extras
+        resultIntent.putExtra( Constants.BIGTEXT_INTENT_EXTRA_KEY, bigText );
+        resultIntent.putExtra( Constants.CONTENT_INTENT_EXTRA_KEY, contentText );
+        resultIntent.putExtra( Constants.TICKER_INTENT_EXTRA_KEY, tickerText );
+        resultIntent.putExtra( Constants.TITLE_INTENT_EXTRA_KEY, title );
+        
+        // This activity will become the start of a new task on this history stack
+        resultIntent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+        
+        // Setting SINGLE_TOP flag will cause onNewIntent to be called when a notification is tapped 
+        resultIntent.addFlags( Intent.FLAG_ACTIVITY_SINGLE_TOP );
+        
         notificationBuilder.setContentIntent( PendingIntent.getActivity( this, 0,
                                               resultIntent, PendingIntent.FLAG_ONE_SHOT ) );
         

@@ -20,6 +20,21 @@ public class Constants {
      */
     public static final String SHARED_PREF_NAME = "androidpushnotificationdemo";
     
+    /**
+     * GCM registration ID key in shared preferences 
+     */
     public static final String PROPERTY_REG_ID = "registration_id";
+    
+    /**
+     * App version key in shared preferences
+     */
     public static final String PROPERTY_APP_VERSION = "appVersion";
+    
+    /**
+     * Intent extra keys
+     */
+    public static final String BIGTEXT_INTENT_EXTRA_KEY = "BigText";
+    public static final String CONTENT_INTENT_EXTRA_KEY = "Content";
+    public static final String TICKER_INTENT_EXTRA_KEY  = "Ticker";
+    public static final String TITLE_INTENT_EXTRA_KEY   = "Title";
 }

@@ -2,6 +2,7 @@ package com.leadingedje.androidpushnotificationdemo;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
     
@@ -17,7 +19,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        
+        setContentView( R.layout.activity_main );
+//        if ( savedInstanceState == null ) {
+//            getFragmentManager().beginTransaction().add( R.id.container, new PlaceholderFragment() ).commit();
+//        }
         if ( PushNotificationRegistration.isGooglePlayServicesAvailable( this ) ) {
             // If Google Play Services are available, attempt to register
             // for push notifications
@@ -25,13 +30,8 @@ public class MainActivity extends Activity {
             PushNotificationRegistration.register( getApplicationContext(), this );
         } else {
             Log.e( TAG, "onCreate(): Google Play Services not available" );
-        }        
-        
-        setContentView( R.layout.activity_main );
-
-        if ( savedInstanceState == null ) {
-            getFragmentManager().beginTransaction().add( R.id.container, new PlaceholderFragment() ).commit();
         }
+        getAndDisplayNotificationContent( getIntent() );
     }
     
     @Override
@@ -43,6 +43,12 @@ public class MainActivity extends Activity {
             Log.e( TAG, "onResume(): Google Play Services not available" );
         }        
     }
+    
+    @Override
+    public void onDestroy() {
+        Log.d( TAG, "onDestroy(): Started" );
+        super.onDestroy();
+    }    
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
@@ -62,6 +68,33 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected( item );
+    }
+    
+    /**
+     * Overriding this allows the mobile app to start a fragment
+     * when a multiple alarm or message notificaiton is tapped
+     * @param intent Intent with action set to the fragment to load
+     */
+    @Override
+    protected void onNewIntent( Intent intent ) {
+        getAndDisplayNotificationContent( intent );
+    }
+    
+    /**
+     * Get the notification content and display it
+     */
+    private void getAndDisplayNotificationContent( Intent intent ) {
+        Bundle extras = intent.getExtras();
+        if ( extras != null && !extras.isEmpty() ) {
+            TextView tv = (TextView)findViewById(R.id.titleTextView);
+            tv.setText( extras.getString( Constants.TITLE_INTENT_EXTRA_KEY ) );
+            tv = (TextView)findViewById(R.id.tickerTextView);
+            tv.setText( extras.getString( Constants.TICKER_INTENT_EXTRA_KEY ) );
+            tv = (TextView)findViewById(R.id.bigtextTextView);
+            tv.setText( extras.getString( Constants.BIGTEXT_INTENT_EXTRA_KEY ) );
+            tv = (TextView)findViewById(R.id.contentTextView);
+            tv.setText( extras.getString( Constants.CONTENT_INTENT_EXTRA_KEY ) );
+        }
     }
 
     /**
