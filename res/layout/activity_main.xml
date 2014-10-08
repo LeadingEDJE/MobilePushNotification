@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:text="@string/title"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/title" />
+        android:textSize="32sp" />
     
     <TextView
         android:id="@+id/tickerTextView"
@@ -21,8 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
+        android:text="@string/ticker"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ticker" />
+        android:textSize="32sp" />
     
     <TextView
         android:id="@+id/bigtextTextView"
@@ -30,8 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
+        android:text="@string/bigtext"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/bigtext" />
+        android:textSize="32sp" />
     
     <TextView
         android:id="@+id/contentTextView"
@@ -39,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="140dp"
+        android:text="@string/content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/content" />
+        android:textSize="32sp" />
     
 </FrameLayout>
