@@ -42,6 +42,7 @@ public class GCMIntentService extends IntentService {
         Log.d( TAG, "onHandleIntent(): Started" );
         Bundle extras = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance( this );
+
         // The getMessageType() intent parameter must be the intent you received
         // in your BroadcastReceiver 
         String messageType = gcm.getMessageType( intent );
@@ -59,6 +60,7 @@ public class GCMIntentService extends IntentService {
                 sendNotification( intent );
             }
         }
+
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GCMBroadcastReceiver.completeWakefulIntent( intent );
     }
@@ -106,10 +108,13 @@ public class GCMIntentService extends IntentService {
         
         // Setting SINGLE_TOP flag will cause onNewIntent to be called when a notification is tapped 
         resultIntent.addFlags( Intent.FLAG_ACTIVITY_SINGLE_TOP );
-        
+
+        // Set the notification content into the notification builder using the
+        // result intent set up above
         notificationBuilder.setContentIntent( PendingIntent.getActivity( this, 0,
                                               resultIntent, PendingIntent.FLAG_ONE_SHOT ) );
-        
+
+        // Send the notification to display it on the device
         Log.d( TAG, "sendNotification(): Calling notify() to send the notification" );
         notificationManager.notify( DEMO_NOTIFICATION_ID, notificationBuilder.build() );
     }

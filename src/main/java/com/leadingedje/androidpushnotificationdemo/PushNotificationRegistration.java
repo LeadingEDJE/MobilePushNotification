@@ -38,14 +38,14 @@ public class PushNotificationRegistration {
             int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable( activity );
             if ( resultCode != ConnectionResult.SUCCESS ) {
                 // If error is recoverable, display the error dialog that will
-                // allow the user to recover
+                // give the user the opportunity to install or update Google Play Services
                 if ( GooglePlayServicesUtil.isUserRecoverableError( resultCode ) ) {
                     Log.e( TAG, "isGooglePlayServicesAvailable(): Google Play Services not availabe.  Prompting user to recover" );
                     GooglePlayServicesUtil
                         .getErrorDialog( resultCode, activity, PLAY_SERVICES_RESOLUTION_REQUEST )
                         .show();
                 } else {
-                    // Google Play Services not support...finish the activity
+                    // Google Play Services not supported...finish the activity
                     Log.e( TAG, "isGooglePlayServicesAvailable(): Google Play Services are not supported on this device." );
                     activity.finish();
                 }
@@ -75,8 +75,8 @@ public class PushNotificationRegistration {
     }
 
     /**
-     * Gets the current registration ID for application on GCM service.
-     * If result is empty, the app needs to register.
+     * Gets the current GCM registration ID from the app's shared preferences
+     * If result is empty, the app needs to register with GCM.
      * @return registration ID, or empty string if there is no existing registration ID.
      */
     public static String getRegistrationId( Context context ) {
@@ -125,7 +125,9 @@ public class PushNotificationRegistration {
     /**
      * Registers the application with GCM servers asynchronously. Stores the
      * registration ID and app versionCode in the application's shared
-     * preferences. Note that because the GCM methods register() and
+     * preferences.
+     *
+     * Note that because the GCM methods register() and
      * unregister() are blocking, this has to take place on a background thread
      * @param context Application context
      */
