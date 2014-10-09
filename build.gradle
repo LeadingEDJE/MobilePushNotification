@@ -28,14 +28,14 @@ android {
 
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
 }
 
+// Dependencies required for Google Play Services
 dependencies {
-    // compile 'com.android.support:support-v4:19.1.0'
     compile 'com.android.support:appcompat-v7:20.+'
     compile 'com.google.android.gms:play-services:5.+'
 }
