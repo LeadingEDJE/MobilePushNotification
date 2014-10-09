@@ -155,6 +155,9 @@ public class PushNotificationRegistration {
                         if ( gcm == null ) {
                             gcm = GoogleCloudMessaging.getInstance( context );
                         }
+
+                        // Sender ID below comes from Google Developers Console when you
+                        // created the Google API project
                         String regid = gcm.register( Constants.SENDER_ID );
                         msg = "registerInBackground(): Device registered, registration ID=" + regid;
 
