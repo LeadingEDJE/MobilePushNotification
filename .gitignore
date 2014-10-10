@@ -44,3 +44,5 @@ uiDesigner.xml
 .settings
 *.launch
 
+# Temporary files
+~*.*
