@@ -42,5 +42,7 @@ uiDesigner.xml
 .externalToolBuilders
 .metadata
 .settings
-*.launch
+
+# Temporary files
+~*.*
 
