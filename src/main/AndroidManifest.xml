@@ -14,13 +14,13 @@
         http://developer.android.com/google/gcm/client.html
     -->
     <!--
-        Android application can send the registration ID to the 3rd party server     
-    -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--
         App can register and receive messages
     -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!--
+        Android application can send the registration ID to the 3rd party server     
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!--
         GCM requires a Google account, 
         necessary only if if the device is running a version lower than Android 4.0.4     

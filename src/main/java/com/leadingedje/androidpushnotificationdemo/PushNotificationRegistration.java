@@ -65,8 +65,10 @@ public class PushNotificationRegistration {
      */
     public static void register( Context context, Activity activity ) {
         gcm = GoogleCloudMessaging.getInstance( activity );
+        // Attempt to get previously saved GCM device registration ID
         String regid = getRegistrationId( context );
         if ( regid.isEmpty() ) {
+            // Registration ID does not exist, register with GCM
             Log.d( TAG, "register(): Registering with GCM" );
             registerInBackground( context );
         } else {
@@ -145,6 +147,7 @@ public class PushNotificationRegistration {
                 do {
                     // Wait before trying GCM registration. This
                     // allows the mobile app to use exponential back down during retries.
+                    // See http://developer.android.com/google/gcm/adv.html#retry
                     long waitTime = ( (long) Math.pow( 2, retries ) * 100L );
                     Log.d( TAG, "registerInBackground(): GCM registration wait time = " + waitTime + "ms" );
                     try {

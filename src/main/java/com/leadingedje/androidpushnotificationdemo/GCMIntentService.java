@@ -7,9 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 /**
@@ -23,10 +21,6 @@ public class GCMIntentService extends IntentService {
     private static final String TAG = GCMIntentService.class.getSimpleName();
 
     public static final int DEMO_NOTIFICATION_ID = 1;
-
-    private NotificationManager notificationManager;
-
-    NotificationCompat.Builder builder;
 
     public GCMIntentService() {
         super( "GCMIntentService" );
@@ -72,7 +66,8 @@ public class GCMIntentService extends IntentService {
      */
     private void sendNotification( Intent intent ) {
         Log.d( TAG, "sendNotification(): Started" );
-        notificationManager = (NotificationManager)this.getSystemService( Context.NOTIFICATION_SERVICE );
+        NotificationManager notificationManager =
+            (NotificationManager) this.getSystemService( Context.NOTIFICATION_SERVICE );
         
         // Bundle will contain contents of data section inside 
         // notification JSON data
@@ -84,7 +79,8 @@ public class GCMIntentService extends IntentService {
         String contentText = bundle.getString( "ContentText", "Default Content Text" );
         String tickerText = bundle.getString( "TickerText", "Default Ticker Text" );
 
-        // Build the notification
+        // Build the notification.
+        // See http://developer.android.com/reference/android/app/Notification.Builder.html
         Notification.Builder notificationBuilder = new Notification.Builder( this );
         notificationBuilder.setSmallIcon( R.drawable.ic_launcher )
                            .setContentTitle( title )
