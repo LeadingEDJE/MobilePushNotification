@@ -82,7 +82,7 @@ public class GCMIntentService extends IntentService {
         // Build the notification.
         // See http://developer.android.com/reference/android/app/Notification.Builder.html
         Notification.Builder notificationBuilder = new Notification.Builder( this );
-        notificationBuilder.setSmallIcon( R.drawable.ic_launcher )
+        notificationBuilder.setSmallIcon( R.drawable.lelogo )
                            .setContentTitle( title )
                            .setStyle( new Notification.BigTextStyle().bigText( bigText ) )
                            .setContentText( contentText )
