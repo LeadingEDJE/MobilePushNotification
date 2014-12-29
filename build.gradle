@@ -38,6 +38,6 @@ android {
 
 // Dependencies required for Google Play Services
 dependencies {
-    compile 'com.android.support:appcompat-v7:20.+'
-    compile 'com.google.android.gms:play-services:5.+'
+    compile 'com.android.support:appcompat-v7:21.+'
+    compile 'com.google.android.gms:play-services:6.1+'
 }
