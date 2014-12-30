@@ -12,6 +12,7 @@ Use the steps below to import, build and run this project after cloning this rep
 2. Start Android Studio
 3. Select Open an existing Android Studio project from Quick Start
 4. Select the directory where you cloned the repository
+5. Click on Import Gradle Project if prompted to do so
 5. Click on the Run button in the toolbar or select Run 'MobilePushNotification' from the Run menu to build and run the app
 
 ## IntelliJ IDEA 14
