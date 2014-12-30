@@ -3,12 +3,21 @@ MobilePushNotification
 
 This is the demo app for my presentation, "Implementing Push Notification Support in your Android App". The presentation slidedeck is inside the file, Implementing Push Notification in Android.pptx.
 
-Use the steps below to import, build and run this project into your IDE after cloning this repository. 
+Use the steps below to import, build and run this project after cloning this repository. 
 
 **NOTE:** Google Play services must be installed in your device or emulator to run this project. See the presentation slidedeck for additional details.
 
-## Android Studio and IntelliJ IDEA
-1. Checkout the master branch.
-2. Select Import Project... from Quick Start or from the File menu.
-2. Browse to the directory where you cloned the repository and select build.gradle
-3. To build and run the app, select Run 'MobilePushNotification' from the Run menu 
+## Android Studio 1.0.2
+1. Checkout the master branch
+2. Start Android Studio
+3. Select Open an existing Android Studio project from Quick Start
+4. Browse to the directory where you cloned the repository and select build.gradle
+5. Click on the Run button in the toolbar or select Run 'MobilePushNotification' from the Run menu to build and run the app
+
+## IntelliJ IDEA 14
+1. Checkout the master branch
+2. Start IntelliJ IDEA
+3. Select Import Project from Welcome to IntelliJ IDEA
+4. Browse to the directory where you cloned the repository and select build.gradle
+5. Click on OK when prompted to Import Project from Gradle
+6. Click on the Run button in the toolbar or select Run 'MobilePushNotification' from the Run menu to build and run the app
