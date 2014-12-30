@@ -1,27 +1,19 @@
-# Built application files
+# Build output
 *.apk
 *.ap_
-
-# Files for the Dalvik VM
-*.dex
-
-# Java class files
 *.class
-
-# Generated files
+*.dex
 ant-gen/
-bin/
-gen/
-out/
-
-# Build output
 ant-build/
+bin/
 build/
 classes/
+gen/
+out/
 target/
 test-classes/
 
-# Gradle files
+# Gradle generated files
 .gradle/
 
 # Local configuration file (sdk path, etc)
@@ -33,16 +25,31 @@ proguard/
 # Log Files
 *.log
 
-# IntelliJ IDEA workspace files
+# Android Studio / IntelliJ IDEA project files
+*.iml
+gradle.xml
+misc.xml
+modules.xml
 tasks.xml
-workspace.xml
 uiDesigner.xml
+vcs.xml
+workspace.xml
+.idea/.name
+.idea/dictionaries/
+.idea/libraries/
+.idea/runConfigurations/
 
 # Eclipse project files
 .externalToolBuilders
-.metadata
+.metadata/
 .settings
-*.launch
+
+# Other IDE files
+*.sublime-workspace
 
 # Temporary files
 ~*.*
+
+# OS specific files
+.DS_Store
+Thumbs.db
