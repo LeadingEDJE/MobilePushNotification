@@ -42,12 +42,14 @@ public class GCMListenerService extends GcmListenerService {
         NotificationManager notificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
+        //---------------------------------------------------------------------
         // Get notification content, use default values if keys don't exist
         String title = messageBundle.getString("Title", "Default Title");
         String bigText = messageBundle.getString("BigText", "Default Big Text");
         String contentText = messageBundle.getString("ContentText", "Default Content Text");
         String tickerText = messageBundle.getString("TickerText", "Default Ticker Text");
 
+        //---------------------------------------------------------------------
         // Build the notification.
         // See http://developer.android.com/reference/android/app/Notification.Builder.html
         Notification.Builder notificationBuilder = new Notification.Builder(this);
@@ -56,26 +58,32 @@ public class GCMListenerService extends GcmListenerService {
                 .setLights(android.R.color.holo_green_light, 300, 1000).setDefaults(Notification.DEFAULT_ALL)
                 .setTicker(tickerText);
 
-        // Create the intent to go to when the notification is tapped.
+        //---------------------------------------------------------------------
+        // Create the intent with the activity to go to when the notification is tapped.
         Intent resultIntent = new Intent(this, MainActivity.class);
 
+        //---------------------------------------------------------------------
         // Put the notification data into the intent as extras
         resultIntent.putExtra(Constants.BIGTEXT_INTENT_EXTRA_KEY, bigText);
         resultIntent.putExtra(Constants.CONTENT_INTENT_EXTRA_KEY, contentText);
         resultIntent.putExtra(Constants.TICKER_INTENT_EXTRA_KEY, tickerText);
         resultIntent.putExtra(Constants.TITLE_INTENT_EXTRA_KEY, title);
 
+        //---------------------------------------------------------------------
         // This activity will become the start of a new task on this history stack
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+        //---------------------------------------------------------------------
         // Setting SINGLE_TOP flag will cause onNewIntent to be called when a notification is tapped 
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
+        //---------------------------------------------------------------------
         // Set the notification content into the notification builder using the
         // result intent set up above
         notificationBuilder
                 .setContentIntent(PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_ONE_SHOT));
 
+        //---------------------------------------------------------------------
         // Send the notification to display it on the device
         Log.d(TAG, "sendNotification(): Calling notify() to send the notification");
         notificationManager.notify(DEMO_NOTIFICATION_ID, notificationBuilder.build());

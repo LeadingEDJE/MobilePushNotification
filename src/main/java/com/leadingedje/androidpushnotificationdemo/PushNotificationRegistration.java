@@ -53,6 +53,7 @@ public class PushNotificationRegistration extends IntentService {
         try {
             int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
             if(resultCode != ConnectionResult.SUCCESS) {
+                //---------------------------------------------------------------------
                 // If error is recoverable, display the error dialog that will
                 // give the user the opportunity to install or update Google Play Services
                 if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
@@ -62,6 +63,7 @@ public class PushNotificationRegistration extends IntentService {
                             .show();
                 }
                 else {
+                    //---------------------------------------------------------------------
                     // Google Play Services not supported...finish the activity
                     Log.e(TAG,
                           "isGooglePlayServicesAvailable(): Google Play Services are not supported on this device.");
@@ -85,9 +87,10 @@ public class PushNotificationRegistration extends IntentService {
     protected void onHandleIntent(Intent intent) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         try {
-            // In the (unlikely) event that multiple refresh operations occur simultaneously,
-            // ensure that they are processed sequentially.
+            //---------------------------------------------------------------------
+            // Handle multiple registration requests sequentially
             synchronized (TAG) {
+                //---------------------------------------------------------------------
                 // Initially this call goes out to the network to retrieve the token, subsequent calls
                 // are local.
                 InstanceID instanceID = InstanceID.getInstance(this);
@@ -95,20 +98,21 @@ public class PushNotificationRegistration extends IntentService {
                                                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                 Log.i(TAG, "onHandleIntent(): GCM Registration Token: " + token);
 
+                //---------------------------------------------------------------------
                 // TODO: Implement this method to send any registration to your app's servers.
                 // sendRegistrationToServer(token);
 
-                // You should store a boolean that indicates whether the generated token has been
-                // sent to your server. If the boolean is false, send the token to your server,
-                // otherwise your server should have already received the token.
+                //---------------------------------------------------------------------
+                // Store a boolean to indicate that registration token was sent to the server
                 sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, true).apply();
             }
         } catch (Exception e) {
-            Log.d(TAG, "onHandleIntent(): Failed to complete token refresh", e);
-            // If an exception happens while fetching the new token or updating our registration data
-            // on a third-party server, this ensures that we'll attempt the update at a later time.
+            Log.d(TAG, "onHandleIntent(): Failed to complete GCM registration", e);
+            //---------------------------------------------------------------------
+            // Setting this flag ensures that we retry registration later
             sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, false).apply();
         }
+        //---------------------------------------------------------------------
         // Notify UI that registration has completed
         Log.d(TAG, "onHandleIntent(): Notifying UI that GCM registration is complete");
         Intent registrationComplete = new Intent(REGISTRATION_COMPLETE);
@@ -120,6 +124,7 @@ public class PushNotificationRegistration extends IntentService {
      * @param activity {@link Activity} that is registering
      */
     public static void register(Activity activity) {
+        //---------------------------------------------------------------------
         // Start IntentService to register this application with GCM.
         Intent intent = new Intent(activity, PushNotificationRegistration.class);
         activity.startService(intent);

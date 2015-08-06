@@ -4,8 +4,6 @@
 
     <!--
         These permissions are required to support push notification via GCM
-        See Step 2: Edit Your Application's Manifest in the link below for additional details
-        http://developer.android.com/google/gcm/client.html
     -->
     <!--
         App can register and receive messages
@@ -52,10 +50,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--
-            This section is required to support push notification via GCM
-        -->
 
         <!--
             Delcaration of GcmReceiver which handles messages sent from GCM

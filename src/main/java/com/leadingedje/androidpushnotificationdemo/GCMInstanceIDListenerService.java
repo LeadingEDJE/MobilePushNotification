@@ -9,7 +9,6 @@ import android.util.Log;
  * This service handles the creation, rotation and updating of
  * GCM registration tokens.
  */
-
 public class GCMInstanceIDListenerService extends InstanceIDListenerService {
     private static final String TAG = GCMInstanceIDListenerService.class.getSimpleName();
 
