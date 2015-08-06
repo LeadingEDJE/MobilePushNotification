@@ -206,6 +206,6 @@ public class PushNotificationRegistration {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString( Constants.PROPERTY_REG_ID, regId );
         editor.putInt( Constants.PROPERTY_APP_VERSION, appVersion );
-        editor.commit();
+        editor.apply();
     }
 }
