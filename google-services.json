@@ -1,0 +1,39 @@
+{
+    "project_info": {
+        "project_id": "android-push-notification-demo",
+        "project_number": "378047010653",
+        "name": "Android Push Notification Demo"
+    },
+    "client": [
+        {
+            "client_info": {
+                "client_id": "android:com.leadingedje.androidpushnotificationdemo",
+                "client_type": 1,
+                "android_client_info": {
+                    "package_name": "com.leadingedje.androidpushnotificationdemo"
+                }
+            },
+            "oauth_client": [],
+            "services": {
+                "analytics_service": {
+                    "status": 1
+                },
+                "cloud_messaging_service": {
+                    "status": 2,
+                    "apns_config": []
+                },
+                "appinvite_service": {
+                    "status": 1,
+                    "other_platform_oauth_client": []
+                },
+                "google_signin_service": {
+                    "status": 1
+                },
+                "ads_service": {
+                    "status": 1
+                }
+            }
+        }
+    ],
+    "ARTIFACT_VERSION": "1"
+}
