@@ -79,38 +79,35 @@
             </intent-filter>
         </receiver>
 
-
-
         <!--
-          BroadcastReceiver that will receive intents from GCM
-          services and handle them to the custom IntentService defined below.
-
-          The com.google.android.c2dm.permission.SEND permission is necessary
-          so only GCM services can send data messages for the app.
+            GcmListenerService implementation that handles incoming GCM messages
         -->
-        <receiver android:name="com.leadingedje.androidpushnotificationdemo.GCMBroadcastReceiver"
-                  android:permission="com.google.android.c2dm.permission.SEND" >
+        <service
+                android:name="com.leadingedje.androidpushnotificationdemo.GCMListenerService"
+                android:exported="false" >
             <intent-filter>
-                <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <!-- Receives the registration id. -->
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="com.leadingedje.androidpushnotificationdemo" />
             </intent-filter>
-        </receiver>
+        </service>
 
         <!--
-          Application-specific subclass of GCMBaseIntentService that will
-          handle received messages.
+            InstanceIDListenerService implementation that handles updating
+            the GCM registration token
         -->
-        <service android:name="com.leadingedje.androidpushnotificationdemo.GCMIntentService" />
-        
+        <service
+                android:name="com.leadingedje.androidpushnotificationdemo.GCMInstanceIDListenerService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
         <!--
-            This meta-data tag is required to use Google Play Services
+            IntentService implementation that handles registering with GCM
         -->
-        <meta-data android:name="com.google.android.gms.version"
-                   android:value="@integer/google_play_services_version" />
-        
+        <service
+                android:name="com.leadingedje.androidpushnotificationdemo.PushNotificationRegistration"
+                android:exported="false">
+        </service>
     </application>
-
 </manifest>
