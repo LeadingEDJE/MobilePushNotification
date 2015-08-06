@@ -55,9 +55,32 @@
 
         <!--
             This section is required to support push notification via GCM
-            See Step 2: Edit Your Application's Manifest in the link below for additional details
-            http://developer.android.com/google/gcm/client.html
         -->
+
+        <!--
+            Delcaration of GcmReceiver which handles messages sent from GCM
+            to this application.
+        -->
+        <receiver
+                android:name="com.google.android.gms.gcm.GcmReceiver"
+                android:exported="true"
+                android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!--
+                    This is required to support pre-4.4 KitKat devices
+                -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <!--
+                    This matches the package name for the GcmListenerService
+                    that will handle incoming GCM messages
+                -->
+                <category android:name="com.leadingedje.androidpushnotificationdemo" />
+            </intent-filter>
+        </receiver>
+
+
+
         <!--
           BroadcastReceiver that will receive intents from GCM
           services and handle them to the custom IntentService defined below.
