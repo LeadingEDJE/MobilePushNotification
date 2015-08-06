@@ -67,7 +67,7 @@
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
                 <!--
                     This matches the package name for the GcmListenerService
-                    that will handle incoming GCM messages
+                    implementation that will handle incoming GCM messages
                 -->
                 <category android:name="com.leadingedje.androidpushnotificationdemo" />
             </intent-filter>

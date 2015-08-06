@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * MainActivity
@@ -38,6 +39,8 @@ public class MainActivity extends Activity {
                 boolean sentToken =
                         sharedPreferences.getBoolean(PushNotificationRegistration.SENT_TOKEN_TO_SERVER, false);
                 Log.d(TAG, "onReceive(): Registration token sent to server: " + sentToken);
+                Toast.makeText(getApplicationContext(),
+                               getString(R.string.registrationComplete), Toast.LENGTH_LONG).show();
             }
         };
 
@@ -55,6 +58,9 @@ public class MainActivity extends Activity {
         getAndDisplayNotificationContent(getIntent());
     }
 
+    /**
+     * Handle resume events
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -75,6 +81,9 @@ public class MainActivity extends Activity {
                                                                  new IntentFilter(PushNotificationRegistration.REGISTRATION_COMPLETE));
     }
 
+    /**
+     * Handle pause events
+     */
     @Override
     protected void onPause() {
         //---------------------------------------------------------------------
