@@ -85,6 +85,14 @@
         </service>
 
         <!--
+            IntentService implementation that handles registering with GCM
+        -->
+        <service
+                android:name="com.leadingedje.androidpushnotificationdemo.PushNotificationRegistration"
+                android:exported="false">
+        </service>
+
+        <!--
             InstanceIDListenerService implementation that handles updating
             the GCM registration token
         -->
@@ -96,12 +104,5 @@
             </intent-filter>
         </service>
 
-        <!--
-            IntentService implementation that handles registering with GCM
-        -->
-        <service
-                android:name="com.leadingedje.androidpushnotificationdemo.PushNotificationRegistration"
-                android:exported="false">
-        </service>
     </application>
 </manifest>
