@@ -10,6 +10,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -17,14 +18,8 @@ import android.util.Log;
  * Push notification registration support
  */
 public class PushNotificationRegistration extends IntentService {
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
     private static final String TAG = PushNotificationRegistration.class.getSimpleName();
-
-    private static GoogleCloudMessaging gcm;
-
-    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
-    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     /**
      * Default constructor
@@ -42,7 +37,7 @@ public class PushNotificationRegistration extends IntentService {
      *                 Services
      * @return boolean true if Google Play Services are available, false otherwise
      */
-    public static boolean isGooglePlayServicesAvailable(Activity activity) {
+    public static boolean isGooglePlayServicesAvailable(@NonNull Activity activity) {
         boolean success = true;
         try {
             int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
@@ -75,7 +70,7 @@ public class PushNotificationRegistration extends IntentService {
 
     /**
      * Handle requests to register with GCM.
-     * @param intent {@link Intent}
+     * @param intent {@link Intent} Not used
      */
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -98,18 +93,18 @@ public class PushNotificationRegistration extends IntentService {
 
                 //---------------------------------------------------------------------
                 // Store a boolean to indicate that registration token was sent to the server
-                sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, true).apply();
+                sharedPreferences.edit().putBoolean(Constants.SENT_TOKEN_TO_SERVER, true).apply();
             }
         } catch (Exception e) {
             Log.d(TAG, "onHandleIntent(): Failed to complete GCM registration", e);
             //---------------------------------------------------------------------
             // Setting this flag to flag can be used to retry sending registration token
-            sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, false).apply();
+            sharedPreferences.edit().putBoolean(Constants.SENT_TOKEN_TO_SERVER, false).apply();
         }
         //---------------------------------------------------------------------
         // Notify UI that registration has completed
         Log.d(TAG, "onHandleIntent(): Notifying UI that GCM registration is complete");
-        Intent registrationComplete = new Intent(REGISTRATION_COMPLETE);
+        Intent registrationComplete = new Intent(Constants.REGISTRATION_COMPLETE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
@@ -117,7 +112,7 @@ public class PushNotificationRegistration extends IntentService {
      * Register for GCM
      * @param activity {@link Activity} that is registering
      */
-    public static void register(Activity activity) {
+    public static void register(@NonNull Activity activity) {
         //---------------------------------------------------------------------
         // Start IntentService to register this application with GCM.
         Intent intent = new Intent(activity, PushNotificationRegistration.class);

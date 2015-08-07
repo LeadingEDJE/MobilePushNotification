@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
                 SharedPreferences sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean sentToken =
-                        sharedPreferences.getBoolean(PushNotificationRegistration.SENT_TOKEN_TO_SERVER, false);
+                        sharedPreferences.getBoolean(Constants.SENT_TOKEN_TO_SERVER, false);
                 Log.d(TAG, "onReceive(): Registration token sent to server: " + sentToken);
                 Toast.makeText(getApplicationContext(),
                                getString(R.string.registrationComplete), Toast.LENGTH_LONG).show();
@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
         // Register the broadcast receiver that will handle
         // GCM registration complete
         LocalBroadcastManager.getInstance(this).registerReceiver(registrationBroadcastReceiver,
-                                                                 new IntentFilter(PushNotificationRegistration.REGISTRATION_COMPLETE));
+                                                                 new IntentFilter(Constants.REGISTRATION_COMPLETE));
     }
 
     /**

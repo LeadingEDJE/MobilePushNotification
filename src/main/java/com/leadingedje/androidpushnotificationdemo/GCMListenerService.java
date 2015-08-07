@@ -16,7 +16,7 @@ import android.util.Log;
 public class GCMListenerService extends GcmListenerService {
     private static final String TAG = GCMListenerService.class.getSimpleName();
 
-    public static final int DEMO_NOTIFICATION_ID = 1;
+    private static final int DEMO_NOTIFICATION_ID = 1;
 
     /**
      * This handler is triggered when a push notification arrives
