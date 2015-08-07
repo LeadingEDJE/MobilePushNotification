@@ -8,10 +8,9 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,9 +92,9 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Overriding this allows the mobile app to start a fragment
-     * when a multiple alarm or message notificaiton is tapped
-     * @param intent Intent with action set to the fragment to load
+     * Overriding this allows the mobile app to get and
+     * display the push notification when it is tapped.
+     * @param intent {@link Intent} containing push notification data
      */
     @Override
     protected void onNewIntent(Intent intent) {
@@ -105,7 +104,7 @@ public class MainActivity extends Activity {
     /**
      * Get the notification content and display it inside the main activity
      */
-    private void getAndDisplayNotificationContent(Intent intent) {
+    private void getAndDisplayNotificationContent(@NonNull Intent intent) {
         Bundle extras = intent.getExtras();
         if(extras != null && !extras.isEmpty()) {
             TextView tv = (TextView) findViewById(R.id.titleTextView);
@@ -123,25 +122,5 @@ public class MainActivity extends Activity {
     public void onDestroy() {
         Log.d(TAG, "onDestroy(): Started");
         super.onDestroy();
-    }
-
-    // Boilerplate code for the settings menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if(id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,7 +1,6 @@
 package com.leadingedje.androidpushnotificationdemo;
 
 import com.google.android.gms.gcm.GcmListenerService;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.app.Notification;
 import android.app.NotificationManager;
