@@ -31,7 +31,7 @@ Replace the device registration token below with your device registration token.
 
     {
         "registration_ids": [
-            "fYvmQ9dDHZE:APA91bEXnLShdJ8NnQT7CoIK7Q0ZBJadBspRg7hs1Q6EfIDMWBTdFsLMo9SHuRnQ9RuTzRAyl6cYlxS5PT7D6m8o_JXAPWYMO6_nv1eXBpbAT7tSgfOOs7CQUSkmHwvVOyTzRpe83dUM"
+            "device registration token goes here"
         ],
         "data": {
             "Title": "Phone Title",
