@@ -24,3 +24,25 @@ After cloning this repo and checking out the ThatConference2015 branch, do the f
 3. Browse to the directory where you cloned the repository and select build.gradle
 4. Click on OK when prompted to Import Project from Gradle
 5. Click on the Run button in the toolbar or select Run 'MobilePushNotification' from the Run menu to build and run the app
+
+## Sending a Push Notification to the this App ##
+The following JSON below can be used within your REST API client (HDC, Postman) to send a notification to this app.
+Replace the device registration token below with your device registration token.
+
+    {
+        "registration_ids": [
+            "fYvmQ9dDHZE:APA91bEXnLShdJ8NnQT7CoIK7Q0ZBJadBspRg7hs1Q6EfIDMWBTdFsLMo9SHuRnQ9RuTzRAyl6cYlxS5PT7D6m8o_JXAPWYMO6_nv1eXBpbAT7tSgfOOs7CQUSkmHwvVOyTzRpe83dUM"
+        ],
+        "data": {
+            "Title": "Phone Title",
+            "BigText": "Phone Big",
+            "ContentText": "Phone Content",
+            "TickerText": "Phone Ticker"
+        }
+    }
+    
+The URL to use is: https://android.googleapis.com/gcm/send
+
+The HTTP headers to use are below:
+ - Authorization: key=<your Google Server API key>
+ - Content-Type: application/json
