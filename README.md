@@ -44,5 +44,5 @@ Replace the device registration token below with your device registration token.
 The URL to use is: https://android.googleapis.com/gcm/send
 
 The HTTP headers to use are below:
- - Authorization: key=<your Google Server API key>
+ - Authorization: key=Your Google Server API key
  - Content-Type: application/json
